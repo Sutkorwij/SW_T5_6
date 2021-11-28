@@ -648,9 +648,36 @@ namespace SW_T8_9_10
 
         private void button_Obrysuj_Click(object sender, EventArgs e)
         {
+            byte[,,] temp = image_PB3.Data;
+            int xmin, ymin, xmax, ymax;
 
+            xmin = 1000;
+            ymin = 1000;
+            xmax = 0;
+            ymax = 0;
 
-            //Dokończyć
+            for(int X = 0; X < desired_image_size.Width; X++)
+            {
+                for(int Y = 0; Y < desired_image_size.Height; Y++)
+                {
+                    if(temp[Y,X,0] == 0xFF && temp[Y,X,1] == 0xFF && temp[Y,X,2] == 0xFF)
+                    {
+                        if (X > xmax) xmax = X;
+                        if (Y > ymax) ymax = Y; 
+                        if(X < xmin) xmin = X;
+                        if(Y < ymin) ymin = Y;
+                    }
+                }
+            }
+
+            listView_Dane_Mechanika.Items.Add("");
+            listView_Dane_Mechanika.Items.Add("xmax = " + xmax);
+            listView_Dane_Mechanika.Items.Add("ymax = " + ymax);
+            listView_Dane_Mechanika.Items.Add("xmin = " + xmin);
+            listView_Dane_Mechanika.Items.Add("ymin = " + ymax);
+
+            CvInvoke.Rectangle(image_PB3, new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin), new MCvScalar(0, 0, 0), 2);
+            pictureBox3.Image = image_PB3.Bitmap;
         }
     }
 }
