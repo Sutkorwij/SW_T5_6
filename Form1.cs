@@ -560,6 +560,7 @@ namespace SW_T8_9_10
             int i, zakres;
             zakres = 320;
             i = 0;
+
             while (czarny == false && i > -zakres && i < zakres)
             {
                 int X = (int)(Pc.X + i * wektor_czerw[0]);
@@ -574,18 +575,60 @@ namespace SW_T8_9_10
                 i++;
             }
 
-            //Dokończyć
+            while (czarny == false && i > -zakres && i < zakres)
+            {
+                int X = (int)(Pc.X + i * wektor_czerw[0]);
+                int Y = (int)(Pc.Y + i * wektor_czerw[1]);
+                if (temp[Y, X, 0] == 0)
+                {
+                    P2.X = X;
+                    P2.Y = Y;
+                    CvInvoke.Circle(image_PB3, P2, 6, new MCvScalar(0, 255, 255), 2);
+                    czarny = true;
+                }
+                i--;
+            }
+
+            while (czarny == false && i > -zakres && i < zakres)
+            {
+                int X = (int)(Pc.X + i * wektor_nieb[0]);
+                int Y = (int)(Pc.Y + i * wektor_nieb[1]);
+                if (temp[Y, X, 0] == 0)
+                {
+                    P3.X = X;
+                    P3.Y = Y;
+                    CvInvoke.Circle(image_PB3, P3, 6, new MCvScalar(255,255,0), 2);
+                    czarny = true;
+                }
+                i++;
+            }
+
+            while (czarny == false && i > -zakres && i < zakres)
+            {
+                int X = (int)(Pc.X + i * wektor_nieb[0]);
+                int Y = (int)(Pc.Y + i * wektor_nieb[1]);
+                if (temp[Y, X, 0] == 0)
+                {
+                    P4.X = X;
+                    P4.Y = Y;
+                    CvInvoke.Circle(image_PB3, P4, 6, new MCvScalar(255,0,255), 2);
+                    czarny = true;
+                }
+                i--;
+            }
 
             //Długość
             double d1, d2, dlugosc;
             d1 = d2 = dlugosc = 0;
+
+            d1 = Math.Sqrt(Math.Pow(P3.X - P4.X, 2) + Math.Pow(P3.Y - P4.Y, 2));
+            d2 = Math.Sqrt(Math.Pow(P1.X - P2.X, 2) + Math.Pow(P1.Y - P2.Y, 2));
 
             if (d1 >= d2)
                 dlugosc = d1;
             else
                 dlugosc = d2;
 
-            //Dokończyć
             CvInvoke.Circle(image_PB3, Pc, 6, new MCvScalar(255, 0, 0), 2);
 
             CvInvoke.Line(image_PB3, Pc, new Point((int)(Pc.X + 120), (int)(Pc.Y)), new MCvScalar(0, 255, 0), 2);
@@ -597,12 +640,15 @@ namespace SW_T8_9_10
 
 
             listView_Dane_Mechanika.Items.Add("Powierzchnia: " + F.ToString());
-            //Dokończyć
-
+            listView_Dane_Mechanika.Items.Add("Środek ciężkości: " + Pc.X.ToString() + ", " + Pc.Y.ToString());
+            listView_Dane_Mechanika.Items.Add("Kąt nachylenia (czerwony): " + (alfa_e * 180 / Math.PI));
+            listView_Dane_Mechanika.Items.Add("Kąt nachylenia (niebieski): " + (alfa_t * 180/Math.PI));
+            listView_Dane_Mechanika.Items.Add("Długość: " + dlugosc.ToString());
         }
 
         private void button_Obrysuj_Click(object sender, EventArgs e)
         {
+
 
             //Dokończyć
         }
