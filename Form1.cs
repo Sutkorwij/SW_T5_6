@@ -177,7 +177,10 @@ namespace SW_T8_9_10
         private void Cykl_Pozaru()
         {
 
-            //Dokończyć
+            do
+            {
+                Krok_Pozaru();
+            } while (pix_tlace.Count > 0);
         }
 
         private void Krok_Pozaru()
