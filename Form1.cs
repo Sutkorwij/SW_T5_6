@@ -439,16 +439,20 @@ namespace SW_T8_9_10
             byte[, ,] temp2 = image_PB2.Data;
 
             MCvScalar kolor = new MCvScalar();
-            kolor.V0 = kolor_wypalenia.V0 + nr;
-            kolor.V1 = kolor_wypalenia.V1 + nr;
-            kolor.V2 = kolor_wypalenia.V2 + nr;
+            kolor.V0 = kolor_wypalenia.V0 + 8 + nr;
+            kolor.V1 = kolor_wypalenia.V1 + 8 + nr;
+            kolor.V2 = kolor_wypalenia.V2 + 8 + nr;
 
             for (int y = 1; y < desired_image_size.Height - 2; y++)
             {
                 for (int x = 1; x < desired_image_size.Width - 2; x++)
                 {
-
-                    //Dokończyć
+                    if (temp1[y, x, 0] == kolor.V0 && temp1[y, x, 1] == kolor.V1 && temp1[y, x, 2] == kolor.V2)
+                    {
+                        temp2[y, x, 0] = 0xff;
+                        temp2[y, x, 1] = 0xff;
+                        temp2[y, x, 2] = 0xff;
+                    }
                 }
             }
 
