@@ -606,6 +606,9 @@ namespace SW_T8_9_10
                 i++;
             }
 
+            czarny = false;
+            i = 0;
+
             while (czarny == false && i > -zakres && i < zakres)
             {
                 int X = (int)(Pc.X + i * wektor_czerw[0]);
@@ -620,6 +623,9 @@ namespace SW_T8_9_10
                 i--;
             }
 
+            czarny = false;
+            i = 0;
+
             while (czarny == false && i > -zakres && i < zakres)
             {
                 int X = (int)(Pc.X + i * wektor_nieb[0]);
@@ -633,6 +639,9 @@ namespace SW_T8_9_10
                 }
                 i++;
             }
+
+            czarny = false;
+            i = 0;
 
             while (czarny == false && i > -zakres && i < zakres)
             {
