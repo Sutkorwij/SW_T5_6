@@ -97,10 +97,18 @@ namespace SW_T8_9_10
 
         private Bitmap get_image_bitmap_from_file(string path, ref Image<Bgr, byte> Data)
         {
-            Mat temp = CvInvoke.Imread(path);
-            CvInvoke.Resize(temp, temp, desired_image_size);
-            Data = temp.ToImage<Bgr, byte>();
-            return Data.Bitmap;
+            try
+            {
+                Mat temp = CvInvoke.Imread(path);
+                CvInvoke.Resize(temp, temp, desired_image_size);
+                Data = temp.ToImage<Bgr, byte>();
+                return Data.Bitmap;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Podana ścieżka jest nieprawidłowa");
+                return null;
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
