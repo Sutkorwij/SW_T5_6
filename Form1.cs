@@ -699,7 +699,7 @@ namespace SW_T8_9_10
             listView_Dane_Mechanika.Items.Add("xmin = " + xmin);
             listView_Dane_Mechanika.Items.Add("ymin = " + ymax);
 
-            CvInvoke.Rectangle(image_PB3, new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin), new MCvScalar(0, 0, 0), 2);
+            CvInvoke.Rectangle(image_PB3, new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin), new MCvScalar(255, 0, 255), 2);
             pictureBox3.Image = image_PB3.Bitmap;
         }
     }
