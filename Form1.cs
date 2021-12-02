@@ -170,8 +170,24 @@ namespace SW_T8_9_10
 
         private void Pozar_Calosci()
         {
+            byte[,,] temp = image_PB1.Data;
 
-            //Dokończyć
+            for(int y = 0; y<desired_image_size.Height; y++)
+            {
+                for(int x = 0; x<desired_image_size.Width; x++)
+                {
+                    if(Sprawdz_czy_cecha_palnosci(temp[y,x,0], temp[y,x,1], temp[y, x, 2]))
+                    {
+                        nr_pozaru++;
+                        aktualny_kolor_wypalenia.V0 = kolor_wypalenia.V0 + 8 + nr_pozaru;
+                        aktualny_kolor_wypalenia.V1 = kolor_wypalenia.V1 + 8 + nr_pozaru;
+                        aktualny_kolor_wypalenia.V2 = kolor_wypalenia.V2 + 8 + nr_pozaru;
+                        pix_tlace.Enqueue(new Point(x,y));
+                        Cykl_Pozaru();
+                        temp = image_PB1.Data;
+                    }
+                }
+            }
         }
 
         private void Cykl_Pozaru()
